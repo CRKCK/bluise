@@ -1,0 +1,151 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JS API Window Mode Test Page</title>
+  </head>
+  <body>
+    <div>
+      <h3>Legacy Syntax</h3>
+      <button id="launch-chat">LAUNCH</button>
+      <button id="toggle-chat">TOGGLE</button>
+      <button id="hide-chat">HIDE</button>
+      <button id="show-chat">SHOW</button>
+      <button id="shutdown-chat">SHUTDOWN</button>
+    </div>
+
+    <div>
+      <h3>New Syntax</h3>
+      <button id="launch-chat-new">LAUNCH (new)</button>
+      <button id="toggle-chat-new">TOGGLE (new)</button>
+      <button id="hide-chat-new">HIDE (new)</button>
+      <button id="show-chat-new">SHOW (new)</button>
+      <button id="shutdown-chat-new">SHUTDOWN (new)</button>
+    </div>
+
+    <script src="https://web.qa.pypestream.eu/api-launcher.js"></script>
+
+    <script>
+      // Legacy Buttons
+      var launchButton = document.getElementById("launch-chat");
+      var toggleButton = document.getElementById("toggle-chat");
+      var hideButton = document.getElementById("hide-chat");
+      var showButton = document.getElementById("show-chat");
+      var shutdownButton = document.getElementById("shutdown-chat");
+
+      // New Syntax Buttons
+      var launchButtonNew = document.getElementById("launch-chat-new");
+      var toggleButtonNew = document.getElementById("toggle-chat-new");
+      var hideButtonNew = document.getElementById("hide-chat-new");
+      var showButtonNew = document.getElementById("show-chat-new");
+      var shutdownButtonNew = document.getElementById("shutdown-chat-new");
+
+      // METHOD TESTING
+
+      // Hide
+      // Legacy
+      Pypestream("onHide", () => {
+        console.warn("onHide legacy syntax");
+      });
+      hideButton.addEventListener("click", function () {
+        Pypestream("hide");
+      });
+      // New
+      Pypestream.onHide(() => {
+        console.warn("onHide new syntax");
+      });
+      hideButtonNew.addEventListener("click", function () {
+        Pypestream.hide();
+      });
+
+      // Show
+      // Legacy
+      Pypestream("onShow", () => {
+        console.warn("onShow legacy syntax");
+      });
+      showButton.addEventListener("click", function () {
+        Pypestream("show");
+      });
+      // New
+      Pypestream.onShow(() => {
+        console.warn("onShow new syntax");
+      });
+      showButtonNew.addEventListener("click", function () {
+        Pypestream.show();
+      });
+
+      // Toggle
+      toggleButton.addEventListener("click", function () {
+        Pypestream("toggle");
+      });
+      toggleButtonNew.addEventListener("click", function () {
+        Pypestream.toggle();
+      });
+
+      // Chat Restart
+      Pypestream("onChatRestart", () => {
+        console.warn("onChatRestart legacy syntax");
+      });
+      Pypestream.onChatRestart(() => {
+        console.warn("onChatRestart new syntax");
+      });
+
+      // Chat End
+      Pypestream("onChatEnd", () => {
+        console.warn("onChatEnd legacy syntax");
+      });
+      Pypestream.onChatEnd(() => {
+        console.warn("onChatEnd new syntax");
+      });
+
+      // Launch
+      // Legacy
+      launchButton.addEventListener("click", function () {
+        Pypestream(
+          "boot",
+          {
+           // APP_ID: "479ad6ff-c7ff-4256-a69b-724d9f52d06e",
+             APP_ID: "58fa4906-9be3-41e9-bbef-dba6b539dbe5",
+            debugMode: true,
+          }
+          // chatContainer
+        );
+      });
+
+      // New
+      launchButtonNew.addEventListener("click", function () {
+        Pypestream.boot(
+          {
+            // APP_ID: "479ad6ff-c7ff-4256-a69b-724d9f52d06e",
+            APP_ID: "58fa4906-9be3-41e9-bbef-dba6b539dbe5",
+            debugMode: true,
+          }
+          // chatContainer
+        );
+      });
+
+      // Shutdown
+      shutdownButton.addEventListener("click", function () {
+        Pypestream("shutdown");
+      });
+      shutdownButtonNew.addEventListener("click", function () {
+        Pypestream.shutdown();
+      });
+
+      if (Pypestream.isVisible()) {
+        Pypestream.boot(
+          {
+           // APP_ID: "479ad6ff-c7ff-4256-a69b-724d9f52d06e",
+             APP_ID: "58fa4906-9be3-41e9-bbef-dba6b539dbe5",
+            debugMode: true,
+            displayMode: "window",
+          }
+          // chatContainer
+        );
+      }
+    </script>
+  </body>
+</html>
